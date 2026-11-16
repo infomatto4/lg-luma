@@ -804,7 +804,7 @@ fn run() -> Result<(), String> {
         renderer::Renderer::new(&assets.root.join("font.ttf"), gles, text_config.embolden)?;
     startup_stage("renderer");
     // Redraw only what changed since the back buffer's frame (LUMA_PARTIAL=0 draws in full).
-    let partial = (std::env::var("LUMA_PARTIAL").as_deref() != Ok("0"))
+    let partial = (std::env::var("LUMA_PARTIAL").as_deref() == Ok("1"))
         .then(egl_damage::PartialUpdate::load)
         .flatten();
     eprintln!(
